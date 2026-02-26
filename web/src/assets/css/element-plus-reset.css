@@ -1,0 +1,101 @@
+/**
+ * Element Plus 主题重置：仅覆盖按钮、表单、Dialog，其余组件保持默认
+ */
+
+/* ========== 1. 变量（供按钮/表单/Dialog 使用） ========== */
+:root {
+  --el-color-primary: #2563eb;
+  --el-color-primary-rgb: 37, 99, 235;
+  --el-color-primary-light-3: rgb(147, 197, 253);
+  --el-color-primary-light-5: rgb(191, 219, 254);
+  --el-color-primary-light-7: rgb(219, 234, 254);
+  --el-color-primary-light-8: rgb(239, 246, 255);
+  --el-color-primary-light-9: rgb(239, 246, 255);
+  --el-color-primary-dark-2: rgb(29, 78, 216);
+  --el-border-radius-base: 10px;
+  --el-border-radius-small: 8px;
+  --el-border-color: #e2e8f0;
+  --el-border-color-light: #e2e8f0;
+  --el-border-color-lighter: #f1f5f9;
+  --el-text-color-primary: #0f172a;
+  --el-text-color-regular: #334155;
+  --el-popup-modal-bg-color: #0f172a;
+  --el-popup-modal-opacity: 0.25;
+}
+
+/* ========== 2. Dialog：白底、蒙层、面板 ========== */
+.v-modal {
+  background-color: var(--el-popup-modal-bg-color) !important;
+  opacity: var(--el-popup-modal-opacity) !important;
+}
+
+.el-dialog {
+  border-radius: 14px !important;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12) !important;
+  overflow: hidden;
+  background-color: #ffffff !important;
+}
+
+.el-dialog__header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+  background-color: #ffffff !important;
+}
+
+.el-dialog__body {
+  padding: 18px 20px;
+  color: var(--el-text-color-regular);
+  background-color: #ffffff !important;
+}
+
+.el-dialog__footer {
+  padding: 14px 20px 18px;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background-color: #ffffff !important;
+}
+
+/* ========== 3. Button ========== */
+.el-button {
+  border-radius: var(--el-border-radius-small);
+  font-weight: 500;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.el-button--default {
+  border-color: var(--el-border-color);
+  color: var(--el-text-color-regular);
+  background-color: #ffffff;
+}
+
+.el-button--default:hover {
+  border-color: var(--el-color-primary-light-5);
+  color: var(--el-color-primary);
+  background-color: var(--el-color-primary-light-9);
+}
+
+.el-button--primary {
+  background-color: var(--el-color-primary);
+  border-color: var(--el-color-primary);
+}
+
+.el-button--primary:hover {
+  background-color: var(--el-color-primary-dark-2);
+  border-color: var(--el-color-primary-dark-2);
+}
+
+/* ========== 4. 表单（Input / Textarea） ========== */
+.el-input__wrapper,
+.el-textarea__inner {
+  border-radius: var(--el-border-radius-small);
+  box-shadow: 0 0 0 1px var(--el-border-color) inset;
+}
+
+.el-input__wrapper:hover,
+.el-textarea__inner:hover {
+  box-shadow: 0 0 0 1px var(--el-border-color-light) inset;
+}
+
+.el-input__wrapper.is-focus,
+.el-textarea__inner:focus {
+  box-shadow: 0 0 0 2px var(--el-color-primary-light-5) inset;
+}

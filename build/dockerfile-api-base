@@ -1,0 +1,13 @@
+# API 基础镜像：Python 运行时 + 系统依赖 + pip 依赖
+# 使用 Alpine 替代 Debian，apk 在 Apple Silicon 交叉构建时比 apt-get 更稳定
+# 仅在 requirements.txt 或系统依赖变更时重建
+FROM docker.m.daocloud.io/library/python:3.11-alpine
+
+WORKDIR /app
+
+# 系统依赖：poppler-utils 用于 pdf2image
+RUN apk add --no-cache poppler-utils
+
+# Python 依赖
+COPY backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt

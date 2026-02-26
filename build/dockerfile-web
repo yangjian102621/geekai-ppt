@@ -1,0 +1,10 @@
+# Frontend Web Dockerfile（从本地构建产物复制，不在 Docker 内构建）
+FROM docker.m.daocloud.io/library/nginx:alpine
+
+# 复制本地构建的前端产物（构建由 build.sh 在本地执行）
+COPY web/dist /usr/share/nginx/html
+
+# 暴露端口
+EXPOSE 80
+
+# 使用 nginx 默认的 entrypoint（会自动处理模板）

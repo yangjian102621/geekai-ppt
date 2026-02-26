@@ -1,0 +1,96 @@
+#app {
+  .card {
+    border: none;
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+    .card-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+      background-color: #fff;
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+    }
+
+    .card-title {
+      margin-bottom: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--bs-dark);
+    }
+
+    .card-body {
+      // 搜索样式
+      .search-container {
+        padding-bottom: 1rem;
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+
+        .search-item {
+          display: flex;
+          margin-right: 10px;
+          flex-flow: column;
+          justify-content: end;
+
+          .el-input {
+            max-width: 200px;
+          }
+
+          .form-label {
+            text-align: left;
+            font-weight: 600 !important;
+          }
+
+          .el-button {
+            padding: 8px 10px;
+          }
+        }
+
+        .search-item:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .data-table {
+        td,
+        th {
+          vertical-align: middle;
+          line-height: 1.462;
+          font-weight: 500;
+        }
+      }
+
+      .icon-copy {
+        cursor: pointer;
+      }
+
+      .pagination {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    .el-form-item__label {
+      font-weight: 700 !important;
+    }
+  }
+
+  .btn-operation {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+  }
+}
+
+// 表格横向滚动和表头不换行通用样式
+.table-responsive {
+  overflow-x: auto;
+}
+
+:deep(.el-table th .cell) {
+  white-space: nowrap;
+}

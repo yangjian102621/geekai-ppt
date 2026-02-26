@@ -1,0 +1,133 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  --el-color-primary: #7c39ed; /* 主色调 */
+  --el-color-primary-light-1: #8b4cf4;
+  --el-color-primary-light-2: #975df7;
+  --el-color-primary-light-3: #a26ef9;
+  --el-color-primary-light-4: #ad7efb;
+  --el-color-primary-light-5: #ba8efa;
+  --el-color-primary-light-6: #c59efa;
+  --el-color-primary-light-7: #e6d5ff; /* 浅5 */
+  --el-color-primary-light-8: #f0e5ff; /* 浅6 */
+  --el-color-primary-light-9: #f5f0ff; /* 浅7 */
+  --el-color-primary-dark-1: #652ce6; /* 深1 */
+  --el-color-primary-dark-2: #5325c4; /* 深2 */
+  --el-color-primary-dark-3: #411d9f; /* 深3 */
+  --el-color-primary-dark-4: #31147e; /* 深4 */
+  --el-color-primary-dark-5: #220b5c; /* 深5 */
+
+  #app {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+      Microsoft YaHei, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .dropdown-round {
+    border-radius: 10px;
+
+    .el-scrollbar {
+      border-radius: 10px;
+
+      .el-dropdown-menu {
+        padding: 5px;
+
+        .el-dropdown-menu__item {
+          padding: 5px 10px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  .dropdown-lg {
+    .el-scrollbar {
+      border-radius: 10px;
+
+      .el-dropdown-menu {
+        padding: 8px;
+
+        .el-dropdown-menu__item {
+          padding: 10px 20px;
+          border-radius: 5px;
+        }
+
+        .danger {
+          color: #f56c6c;
+        }
+      }
+    }
+  }
+
+  .el-message-box {
+    --el-messagebox-padding-primary: 16px;
+  }
+
+  .el-message {
+    border: 2px solid #67c23a !important; // 默认绿色边框
+    background: linear-gradient(90deg, #eafbe7 0%, #f6fff4 100%) !important;
+    font-weight: bold !important;
+    color: #333 !important;
+    box-shadow: 0 2px 8px rgba(103, 194, 58, 0.08);
+    border-radius: 5px;
+  }
+  .el-message--success {
+    border-color: #67c23a !important;
+    background: linear-gradient(90deg, #eafbe7 0%, #f6fff4 100%) !important;
+  }
+  .el-message--warning {
+    border-color: #e6a23c !important;
+    background: linear-gradient(90deg, #fffbe6 0%, #fff9e6 100%) !important;
+  }
+  .el-message--error {
+    border-color: #f56c6c !important;
+    background: linear-gradient(90deg, #ffeaea 0%, #fff6f6 100%) !important;
+  }
+  .el-message--info {
+    border-color: #909399 !important;
+    background: linear-gradient(90deg, #f4f4f5 0%, #fafbfc 100%) !important;
+  }
+  .el-message__content {
+    font-weight: bold !important;
+  }
+
+  .loading-overlay {
+    position: absolute;
+    :deep(.el-loading-spinner) {
+      .el-loading-text {
+        color: var(--el-color-primary);
+      }
+    }
+  }
+}
+
+.el-message--mobile {
+  width: min(90%, 320px);
+  margin: 0 auto;
+}
+
+.spinner-border {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.2em solid rgba(124, 57, 237, 0.25);
+  border-top-color: var(--bs-primary);
+  border-radius: 50%;
+  animation: app-spinner 0.75s linear infinite;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.16em;
+}
+
+@keyframes app-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

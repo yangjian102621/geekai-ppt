@@ -1,0 +1,60 @@
+# 从阿里云镜像仓库拉取镜像部署，不本地构建
+# 镜像版本通过环境变量 IMAGE_TAG 指定，例如: IMAGE_TAG=v1.0-amd64 docker-compose up -d
+version: '3.8'
+
+services:
+  # Backend API 服务
+  api:
+    image: registry.cn-shenzhen.aliyuncs.com/geekmaster/geekai-ppt-api:v1.0.0
+    container_name: geekai-ppt-api
+    ports:
+      - '8002:8002'
+    environment:
+      - API_KEY=${API_KEY:-}
+      - BASE_URL=${BASE_URL:-https://api.geekai.pro}
+      - MODEL_LOGIC=${MODEL_LOGIC:-gemini-3-pro-preview}
+      - MODEL_IMAGE=${MODEL_IMAGE:-gemini-3-pro-image-preview}
+      - PORT=8002
+    volumes:
+      - ./data/storage:/app/storage
+    networks:
+      - geekai-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'python',
+          '-c',
+          "import urllib.request; urllib.request.urlopen('http://localhost:8002/')",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Web 服务
+  web:
+    image: registry.cn-shenzhen.aliyuncs.com/geekmaster/geekai-ppt-web:v1.0.0
+    container_name: geekai-ppt-web
+    ports:
+      - '80:80'
+    volumes:
+      - ./build/nginx-web.conf:/etc/nginx/templates/default.conf.template
+    environment:
+      - API_HOST=api
+      - API_PORT=8002
+    depends_on:
+      - api
+    networks:
+      - geekai-network
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  geekai-network:
+    driver: bridge

@@ -1,0 +1,141 @@
+/**
+ * Element Plus 主题重置（仅前端生效）：body.theme-frontend 时覆盖按钮、表单、Dialog
+ */
+
+/* ========== 1. 变量（供按钮/表单/Dialog 及登录弹窗等使用） ========== */
+body.theme-frontend {
+  --el-color-primary: #2563eb;
+  --el-color-primary-rgb: 37, 99, 235;
+  --el-color-primary-light-3: rgb(147, 197, 253);
+  --el-color-primary-light-5: rgb(191, 219, 254);
+  --el-color-primary-light-7: rgb(219, 234, 254);
+  --el-color-primary-light-8: rgb(239, 246, 255);
+  --el-color-primary-light-9: rgb(239, 246, 255);
+  --el-color-primary-dark-2: rgb(29, 78, 216);
+  --el-border-radius-base: 10px;
+  --el-border-radius-small: 8px;
+  --el-border-color: #e2e8f0;
+  --el-border-color-light: #e2e8f0;
+  --el-border-color-lighter: #f1f5f9;
+  --el-text-color-primary: #0f172a;
+  --el-text-color-regular: #334155;
+  --el-popup-modal-bg-color: #0f172a;
+  --el-popup-modal-opacity: 0.25;
+
+  /* 前端设计令牌（登录弹窗等使用，与 slate/blue 色系一致） */
+  --tech-slate-50: #f8fafc;
+  --tech-slate-100: #f1f5f9;
+  --tech-slate-200: #e2e8f0;
+  --tech-slate-300: #cbd5e1;
+  --tech-slate-400: #94a3b8;
+  --tech-slate-500: #64748b;
+  --tech-slate-600: #475569;
+  --tech-slate-700: #334155;
+  --tech-slate-800: #1e293b;
+  --tech-slate-900: #0f172a;
+  --tech-blue-50: #eff6ff;
+  --tech-blue-200: #bfdbfe;
+  --tech-blue-400: #60a5fa;
+  --tech-blue-500: #3b82f6;
+  --tech-blue-600: #2563eb;
+  --tech-blue-700: #1d4ed8;
+}
+
+/* ========== 2. Dialog：白底、蒙层、面板 ========== */
+body.theme-frontend .v-modal {
+  background-color: var(--el-popup-modal-bg-color) !important;
+  opacity: var(--el-popup-modal-opacity) !important;
+}
+
+body.theme-frontend .el-dialog {
+  border-radius: 14px !important;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12) !important;
+  overflow: hidden;
+  background-color: #ffffff !important;
+}
+
+body.theme-frontend .el-dialog__header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+  background-color: #ffffff !important;
+}
+
+body.theme-frontend .el-dialog__body {
+  padding: 18px 20px;
+  color: var(--el-text-color-regular);
+  background-color: #ffffff !important;
+}
+
+body.theme-frontend .el-dialog__footer {
+  padding: 14px 20px 18px;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background-color: #ffffff !important;
+}
+
+/* ========== 3. Button ========== */
+body.theme-frontend .el-button {
+  border-radius: var(--el-border-radius-small);
+  font-weight: 500;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+body.theme-frontend .el-button--default {
+  border-color: var(--el-border-color);
+  color: var(--el-text-color-regular);
+  background-color: #ffffff;
+}
+
+body.theme-frontend .el-button--default:hover {
+  border-color: var(--el-color-primary-light-5);
+  color: var(--el-color-primary);
+  background-color: var(--el-color-primary-light-9);
+}
+
+body.theme-frontend .el-button--primary {
+  background-color: var(--el-color-primary);
+  border-color: var(--el-color-primary);
+}
+
+body.theme-frontend .el-button--primary:hover {
+  background-color: var(--el-color-primary-dark-2);
+  border-color: var(--el-color-primary-dark-2);
+}
+
+/* primary/danger plain 按钮：保留浅底+主色文字，避免被上面实心样式覆盖导致文字不可见 */
+body.theme-frontend .el-button--primary.is-plain {
+  background-color: var(--el-color-primary-light-9);
+  border-color: var(--el-color-primary-light-5);
+  color: var(--el-color-primary);
+}
+body.theme-frontend .el-button--primary.is-plain:hover {
+  background-color: var(--el-color-primary);
+  border-color: var(--el-color-primary);
+  color: var(--el-color-white, #fff);
+}
+body.theme-frontend .el-button--danger.is-plain {
+  background-color: var(--el-color-danger-light-9, #fef0f0);
+  border-color: var(--el-color-danger-light-5, #fbc4c4);
+  color: var(--el-color-danger);
+}
+body.theme-frontend .el-button--danger.is-plain:hover {
+  background-color: var(--el-color-danger);
+  border-color: var(--el-color-danger);
+  color: var(--el-color-white, #fff);
+}
+
+/* ========== 4. 表单（Input / Textarea） ========== */
+body.theme-frontend .el-input__wrapper,
+body.theme-frontend .el-textarea__inner {
+  border-radius: var(--el-border-radius-small);
+  box-shadow: 0 0 0 1px var(--el-border-color) inset;
+}
+
+body.theme-frontend .el-input__wrapper:hover,
+body.theme-frontend .el-textarea__inner:hover {
+  box-shadow: 0 0 0 1px var(--el-border-color-light) inset;
+}
+
+body.theme-frontend .el-input__wrapper.is-focus,
+body.theme-frontend .el-textarea__inner:focus {
+  box-shadow: 0 0 0 2px var(--el-color-primary-light-5) inset;
+}

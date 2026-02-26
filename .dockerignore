@@ -1,0 +1,62 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+docs/
+CLAUDE.md
+AGENTS.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+venv
+env
+ENV
+.venv
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+.pnpm-store
+.vite
+dist
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Storage (will be mounted as volume)
+backend/storage/*
+!backend/storage/.gitkeep
+
+# Build 目录保留 nginx-web.conf 供 dockerfile-web 使用；仅排除脚本
+build/build.sh
+build/dockerfile-api
+build/dockerfile-web
+
+# Frontend backup
+frontend/
+frontend/src-react-backup/
+
+# OS
+.DS_Store
+Thumbs.db

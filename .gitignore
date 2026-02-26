@@ -1,0 +1,15 @@
+node_modules
+venv
+
+# Backend runtime storage (sessions, images, db files, temp JSON)
+backend/storage/images/
+backend/storage/sessions/
+backend/storage/*.db
+backend/storage/*.json
+
+# Environment files (keep only sample/example files tracked)
+.env
+.env.local
+
+.cursor
+__pycache__
