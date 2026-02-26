@@ -1,7 +1,17 @@
 {
-  "name": "geekai-agent-front",
+  "name": "geekai-ppt-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "AI-powered PPT generation platform - GeekAI-PPT Frontend",
+  "author": "yangjian102621",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yangjian102621/geekai-ppt"
+  },
+  "homepage": "https://github.com/yangjian102621/geekai-ppt#readme",
+  "bugs": {
+    "url": "https://github.com/yangjian102621/geekai-ppt/issues"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite --host",

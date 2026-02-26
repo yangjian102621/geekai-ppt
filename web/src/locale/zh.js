@@ -73,6 +73,7 @@ export const zh = {
     insufficientScoresConfirm: '您的积分不足以生成 {count} 张幻灯片（需 {need} 积分，当前仅 {current}）',
     scoresPerSlide: '每张消耗',
     scoresSuffix: '积分',
+    github: '源码',
   },
   editor: {
     back: '返回',

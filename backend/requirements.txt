@@ -1,14 +1,34 @@
-fastapi
-uvicorn
-python-multipart
-python-dotenv
-openai
-pypdf
-python-docx
-pdf2image
-PyPDF2
-requests
-aiohttp
-sqlalchemy
-python-jose[cryptography]
-bcrypt
+# ============================================================================
+# GeekAI-PPT Backend Dependencies
+# ============================================================================
+# This file contains all Python dependencies required for the GeekAI-PPT backend.
+# Install with: pip install -r requirements.txt
+# ============================================================================
+
+# Core Web Framework
+fastapi==0.104.1        # FastAPI web framework for building APIs
+uvicorn[standard]==0.24.0  # ASGI server with standard extras for hot reload
+python-multipart==0.0.6   # Support for form data parsing (file uploads)
+
+# Configuration Management
+python-dotenv==1.0.0      # Load environment variables from .env files
+
+# AI/ML Integration
+openai>=1.12.0            # OpenAI API client (compatible with GeekAI API)
+
+# Document Processing
+pypdf==3.17.0            # PDF text extraction and manipulation
+python-docx==1.1.0       # Microsoft Word (.docx) document processing
+pdf2image==1.16.3        # Convert PDF pages to images
+PyPDF2==3.0.1            # Additional PDF utilities
+
+# HTTP Clients
+requests==2.31.0         # Synchronous HTTP client
+aiohttp==3.9.1           # Asynchronous HTTP client for concurrent requests
+
+# Database (Future Use)
+sqlalchemy==2.0.23       # SQL toolkit and ORM
+
+# Security (Future Use)
+python-jose[cryptography]==3.3.0  # JWT token handling
+bcrypt==4.1.2            # Password hashing

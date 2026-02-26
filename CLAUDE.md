@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an AI-powered PPT generation platform called "极客学长 docs.geekai.me". It consists of a FastAPI backend and a React/TypeScript frontend that uses the GeekAI API (Google Gemini models) to generate presentation slides with modern tech aesthetics.
+This is an AI-powered PPT generation platform called "GeekAI-PPT". It consists of a FastAPI backend and a Vue.js frontend that uses the GeekAI API (Google Gemini models) to generate presentation slides with modern tech aesthetics.
 
 ## Development Commands
 
@@ -25,22 +25,22 @@ uvicorn main:app --host 0.0.0.0 --port 8002 --reload
 # Server runs on http://localhost:8002
 ```
 
-### Frontend (React/Vite)
+### Frontend (Vue/Vite)
 
 ```bash
-# Navigate to frontend directory
-cd frontend
+# Navigate to web directory
+cd web
 
 # Install dependencies
 npm install
 
 # Run development server
 npm run dev
-# Server runs on http://localhost:3000
+# Server runs on http://localhost:5173
 
 # Build for production
 npm run build
-# Output directory: build/
+# Output directory: dist/
 ```
 
 ## Architecture
@@ -83,13 +83,14 @@ The backend follows a modular service-oriented architecture:
 
 ### Frontend Architecture
 
-React-based SPA with component-driven architecture:
+Vue.js-based SPA with component-driven architecture:
 
-- **components/login/** - Landing page with API key setup and project history
-- **components/editor/** - Main PPT editor with canvas, filmstrip, and version control
-- **components/ui/** - Radix UI component library (50+ components)
-- **services/api.ts** - API client for backend communication
-- **types/** - TypeScript type definitions
+- **src/components/login/** - Landing page with API key setup and project history
+- **src/components/editor/** - Main PPT editor with canvas, filmstrip, and version control
+- **src/views/** - Main application views (Creator, Editor, etc.)
+- **src/components/ui/** - Element Plus UI components
+- **src/api/** - API client for backend communication
+- **src/stores/** - Pinia state management
 
 ### Key Design Patterns
 
@@ -117,7 +118,7 @@ The API key can be set via the frontend UI, which calls `/api/key/save` to updat
 
 ### Frontend Configuration
 
-Frontend uses Vite with default port 3000. Backend API URL is hardcoded in `services/api.ts` (typically `http://localhost:8002`).
+Frontend uses Vite with default port 5173. Backend API URL is configured in `.env` files via `VITE_API_BASE_URL` (typically `/api` for development proxy or `http://localhost:8002` for direct access).
 
 ## Important Implementation Details
 
@@ -190,11 +191,12 @@ After modifying API key handling:
 - python-dotenv - Environment variable management
 
 ### Frontend
-- React 18.x with TypeScript
-- Vite 6.x for build tooling
-- Radix UI component library (extensive set of primitives)
+- Vue.js 3.x with Composition API
+- Vite 5.x for build tooling
+- Element Plus UI component library
 - jspdf for PDF export
 - Tailwind CSS for styling
+- Pinia for state management
 
 ## Storage Structure
 
@@ -208,7 +210,7 @@ storage/
 
 ## Notes for Future Development
 
-- The frontend expects backend at `http://localhost:8002` - update `services/api.ts` if deploying
+- The frontend expects backend at the URL configured in `VITE_API_BASE_URL` environment variable
 - Image generation can fail silently - check retry logic in `_call_with_retry()`
 - Session files grow with chat history - consider implementing cleanup/archival
 - The system uses Chinese comments in some files - maintain consistency when adding code

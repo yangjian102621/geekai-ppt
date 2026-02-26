@@ -1,6 +1,19 @@
-# GeekAI-PPT - AI 演示文稿生成平台
+<div align="center">
+  <img src="web/public/images/logo.png" alt="GeekAI-PPT Logo" width="200">
 
-基于 AI 的 PPT 生成平台，通过自然语言描述或上传文档，快速生成具有现代科技美学的演示文稿。  
+  # GeekAI-PPT
+
+  **有逻辑，又有审美** - AI 驱动的智能 PPT 生成平台
+
+  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+  [![GitHub Stars](https://img.shields.io/github/stars/yangjian102621/geekai-ppt)](https://github.com/yangjian102621/geekai-ppt/stargazers)
+  [![GitHub Forks](https://img.shields.io/github/forks/yangjian102621/geekai-ppt)](https://github.com/yangjian102621/geekai-ppt/network/members)
+  [![GitHub Issues](https://img.shields.io/github/issues/yangjian102621/geekai-ppt)](https://github.com/yangjian102621/geekai-ppt/issues)
+</div>
+
+---
+
+基于 AI 的 PPT 生成平台，通过自然语言描述或上传文档，快速生成具有现代科技美学的演示文稿。
 _AI-powered presentation generator with modern tech aesthetics (FastAPI + Vue 3 + Gemini)._
 
 ## ✨ 功能特性

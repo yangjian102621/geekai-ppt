@@ -25,6 +25,23 @@
                 <i class="iconfont icon-power"></i>
                 <span class="relative z-10">作品广场</span>
               </router-link>
+              <a
+                href="https://github.com/yangjian102621/geekai-ppt"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 text-sm font-medium text-[var(--tech-slate-700)] hover:text-[var(--tech-blue-600)] transition-colors px-2 py-1 rounded-md hover:bg-[var(--tech-slate-50)]"
+              >
+                <span class="flex items-center gap-1">
+                  <i class="iconfont icon-github text-base"></i>
+                  <span>{{ zh.home.github }}</span>
+                </span>
+                <img
+                  src="https://img.shields.io/github/stars/yangjian102621/geekai-ppt?style=social"
+                  alt="GitHub stars"
+                  class="h-4"
+                  loading="lazy"
+                />
+              </a>
               <el-button
                 v-if="!authStore.isAuthenticated"
                 type="primary"
