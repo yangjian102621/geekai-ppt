@@ -44,7 +44,7 @@ _AI-powered presentation generator with modern tech aesthetics (FastAPI + Vue 3 
 
 - Python 3.9+
 - Node.js 18+
-- [GeekAI](https://geekai.pro/) API Key（用于调用 Gemini 模型）
+- [GeekAI](https://geekai.pro/) API Key（用于调用 Gemini 模型，项目默认推荐）
 
 ### 1. 克隆项目
 
@@ -86,11 +86,21 @@ npm run dev
   ```
 - 首次使用可在应用内配置 API Key，或直接在 `backend/.env` 中设置。
 
+**示例后端配置（使用 GeekAI 中转，可按需替换为其他兼容 Gemini API 协议的服务）**：
+
+```env
+API_KEY=sk-or-v1-xxxxxxxx
+BASE_URL=https://api.geekai.pro
+MODEL_LOGIC=gemini-3-pro-preview
+MODEL_IMAGE=gemini-3-pro-image-preview
+PORT=8002
+```
+
 **常见问题**：
 
 - 端口冲突：后端默认 `8002`、前端默认 `3000`，可在 `backend/.env` 中修改 `PORT`，前端通过 `VITE_API_BASE_URL` 指向后端。
-- API Key 无效：请确认 `backend/.env` 中 `API_KEY` 与 `BASE_URL` 正确；使用 GeekAI 时 `BASE_URL` 为 `https://api.geekai.pro`。
-- 生成失败：检查后端日志；若为模型或配额限制，可更换 `MODEL_LOGIC` / `MODEL_IMAGE` 或 API 提供商。
+- API Key 无效：请确认 `backend/.env` 中 `API_KEY` 与 `BASE_URL` 配置正确；使用 GeekAI 时推荐将 `BASE_URL` 设置为 `https://api.geekai.pro`。也可以改为任意兼容 Gemini API 协议的服务地址。
+- 生成失败：检查后端日志；若为模型或配额限制，可更换 `MODEL_LOGIC` / `MODEL_IMAGE` 或上游模型服务提供商。
 
 > ⚠️ `.env` 包含敏感信息，请勿提交到版本控制。仓库中仅提供 `.env.sample` 作为模板。
 
