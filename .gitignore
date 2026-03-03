@@ -14,3 +14,4 @@ backend/storage/*.json
 .cursor
 __pycache__
 .vite
+mydocs

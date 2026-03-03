@@ -2,11 +2,8 @@
 // 将 TypeScript fetch API 转换为 JavaScript axios 调用
 
 import { httpGet, httpPost, httpDelete, httpPatch } from '../utils/http'
-import { getUserToken, setUserToken, removeUserToken, getAdminToken, setAdminToken, removeAdminToken } from '../cache/session'
-
-// API 基础 URL - web 框架使用代理，所以使用 /api 前缀
-// 如果需要完整 URL，可以通过环境变量 VITE_API_BASE_URL 配置
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
+import { setAdminToken } from '../cache/session'
+import { API_BASE_URL } from '@/config'
 
 // 未授权回调
 let onUnauthorized = null
@@ -28,7 +25,7 @@ function handleErrorResponse(error) {
   if (error.response) {
     const status = error.response.status
     const data = error.response.data || {}
-    
+
     if (status === 401) {
       // 401 错误已在 http.js 拦截器中处理
       onUnauthorized?.()
@@ -88,7 +85,7 @@ export async function userChangePassword(oldPassword, newPassword) {
   try {
     return await httpPatch(buildUrl('/user/me/password'), {
       old_password: oldPassword,
-      new_password: newPassword
+      new_password: newPassword,
     })
   } catch (error) {
     handleErrorResponse(error)
@@ -106,7 +103,10 @@ export async function userScoreLogs(skip = 0, limit = 20) {
 // ============ 管理员 API ============
 export async function adminLogin(username, password) {
   try {
-    const data = await httpPost(buildUrl('/admin/auth/login'), { username, password })
+    const data = await httpPost(buildUrl('/admin/auth/login'), {
+      username,
+      password,
+    })
     // 保存 token
     if (data.access_token) {
       setAdminToken(`Bearer ${data.access_token}`)
@@ -129,7 +129,7 @@ export async function adminChangePassword(oldPassword, newPassword) {
   try {
     return await httpPatch(buildUrl('/admin/me/password'), {
       old_password: oldPassword,
-      new_password: newPassword
+      new_password: newPassword,
     })
   } catch (error) {
     handleErrorResponse(error)
@@ -149,7 +149,7 @@ export async function adminCreateUser(username, password, initialScores = 0) {
     return await httpPost(buildUrl('/admin/users'), {
       username,
       password,
-      initial_scores: initialScores
+      initial_scores: initialScores,
     })
   } catch (error) {
     handleErrorResponse(error)
@@ -186,7 +186,7 @@ export async function adminUpdateConfig(config) {
   try {
     return await httpPatch(buildUrl('/admin/config'), {
       scores_per_slide: config.scores_per_slide,
-      register_bonus_scores: config.register_bonus_scores
+      register_bonus_scores: config.register_bonus_scores,
     })
   } catch (error) {
     handleErrorResponse(error)
@@ -195,7 +195,10 @@ export async function adminUpdateConfig(config) {
 
 export async function adminCreateRedemptionCodes(scores, count) {
   try {
-    return await httpPost(buildUrl('/admin/redemption-codes'), { scores, count })
+    return await httpPost(buildUrl('/admin/redemption-codes'), {
+      scores,
+      count,
+    })
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -282,7 +285,9 @@ export async function getPresentation(presentationId) {
 
 export async function updatePresentation(presentationId, title) {
   try {
-    return await httpPatch(buildUrl(`/presentations/${presentationId}`), { title })
+    return await httpPatch(buildUrl(`/presentations/${presentationId}`), {
+      title,
+    })
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -306,7 +311,9 @@ export async function restorePresentation(presentationId) {
 
 export async function permanentlyDeletePresentation(presentationId) {
   try {
-    return await httpDelete(buildUrl(`/presentations/${presentationId}/permanent`))
+    return await httpDelete(
+      buildUrl(`/presentations/${presentationId}/permanent`),
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -357,7 +364,9 @@ export async function getGalleryPresentation(presentationId) {
 // ============ 幻灯片 ============
 export async function deleteSlide(presentationId, slideId) {
   try {
-    return await httpDelete(buildUrl(`/presentations/${presentationId}/slides/${slideId}`))
+    return await httpDelete(
+      buildUrl(`/presentations/${presentationId}/slides/${slideId}`),
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -365,7 +374,9 @@ export async function deleteSlide(presentationId, slideId) {
 
 export async function listDeletedSlides(presentationId) {
   try {
-    const res = await httpGet(buildUrl(`/presentations/${presentationId}/slides/deleted`))
+    const res = await httpGet(
+      buildUrl(`/presentations/${presentationId}/slides/deleted`),
+    )
     return res.slides || res
   } catch (error) {
     handleErrorResponse(error)
@@ -374,7 +385,9 @@ export async function listDeletedSlides(presentationId) {
 
 export async function restoreSlide(presentationId, slideId) {
   try {
-    return await httpPost(buildUrl(`/presentations/${presentationId}/slides/${slideId}/restore`))
+    return await httpPost(
+      buildUrl(`/presentations/${presentationId}/slides/${slideId}/restore`),
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -382,9 +395,14 @@ export async function restoreSlide(presentationId, slideId) {
 
 export async function setActiveVersion(presentationId, slideId, versionId) {
   try {
-    return await httpPatch(buildUrl(`/presentations/${presentationId}/slides/${slideId}/active-version`), {
-      version_id: versionId
-    })
+    return await httpPatch(
+      buildUrl(
+        `/presentations/${presentationId}/slides/${slideId}/active-version`,
+      ),
+      {
+        version_id: versionId,
+      },
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -392,7 +410,11 @@ export async function setActiveVersion(presentationId, slideId, versionId) {
 
 export async function deleteVersion(presentationId, slideId, versionId) {
   try {
-    return await httpDelete(buildUrl(`/presentations/${presentationId}/slides/${slideId}/versions/${versionId}`))
+    return await httpDelete(
+      buildUrl(
+        `/presentations/${presentationId}/slides/${slideId}/versions/${versionId}`,
+      ),
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -400,7 +422,9 @@ export async function deleteVersion(presentationId, slideId, versionId) {
 
 export async function listVersions(presentationId, slideId) {
   try {
-    return await httpGet(buildUrl(`/presentations/${presentationId}/slides/${slideId}/versions`))
+    return await httpGet(
+      buildUrl(`/presentations/${presentationId}/slides/${slideId}/versions`),
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -408,7 +432,10 @@ export async function listVersions(presentationId, slideId) {
 
 export async function createVersion(presentationId, slideId, req) {
   try {
-    return await httpPost(buildUrl(`/presentations/${presentationId}/slides/${slideId}/versions`), req)
+    return await httpPost(
+      buildUrl(`/presentations/${presentationId}/slides/${slideId}/versions`),
+      req,
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -427,9 +454,9 @@ export async function planPPT(request) {
     audience,
     scene,
     attention,
-    purpose
+    purpose,
   } = request
-  
+
   try {
     return await httpPost(buildUrl(`/presentations/${presentation_id}/plan`), {
       topic,
@@ -441,7 +468,7 @@ export async function planPPT(request) {
       audience,
       scene,
       attention,
-      purpose
+      purpose,
     })
   } catch (error) {
     handleErrorResponse(error)
@@ -449,12 +476,16 @@ export async function planPPT(request) {
 }
 
 export function getPlanProgressStream(presentationId) {
-  return new EventSource(`${API_BASE_URL || ''}/presentations/${presentationId}/plan-progress`)
+  return new EventSource(
+    `${API_BASE_URL || ''}/presentations/${presentationId}/plan-progress`,
+  )
 }
 
 export async function resumeGenerate(presentationId) {
   try {
-    const response = await httpPost(buildUrl(`/presentations/${presentationId}/resume-generate`))
+    const response = await httpPost(
+      buildUrl(`/presentations/${presentationId}/resume-generate`),
+    )
     return response
   } catch (error) {
     if (error.response?.status === 402) {
@@ -467,11 +498,15 @@ export async function resumeGenerate(presentationId) {
 
 export async function startGenerate(presentationId, slides) {
   try {
-    return await httpPost(buildUrl(`/presentations/${presentationId}/generate`), { slides }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    return await httpPost(
+      buildUrl(`/presentations/${presentationId}/generate`),
+      { slides },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
   } catch (error) {
     if (error.response?.status === 402) {
       const err = error.response.data || {}
@@ -483,7 +518,10 @@ export async function startGenerate(presentationId, slides) {
 
 export async function insertSlideByOutline(presentationId, payload) {
   try {
-    return await httpPost(buildUrl(`/presentations/${presentationId}/slides/insert`), payload)
+    return await httpPost(
+      buildUrl(`/presentations/${presentationId}/slides/insert`),
+      payload,
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -491,11 +529,15 @@ export async function insertSlideByOutline(presentationId, payload) {
 
 export async function generateFromOutline(presentationId, payload) {
   try {
-    return await httpPost(buildUrl(`/presentations/${presentationId}/generate-from-outline`), payload, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    return await httpPost(
+      buildUrl(`/presentations/${presentationId}/generate-from-outline`),
+      payload,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
   } catch (error) {
     if (error.response?.status === 402) {
       const err = error.response.data || {}
@@ -507,7 +549,9 @@ export async function generateFromOutline(presentationId, payload) {
 
 export async function getGenerationProgress(presentationId) {
   try {
-    return await httpGet(buildUrl(`/presentations/${presentationId}/generation-progress`))
+    return await httpGet(
+      buildUrl(`/presentations/${presentationId}/generation-progress`),
+    )
   } catch (error) {
     handleErrorResponse(error)
   }
@@ -520,8 +564,8 @@ export async function uploadDoc(file) {
     formData.append('file', file)
     return await httpPost(buildUrl('/upload/doc'), formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+        'Content-Type': 'multipart/form-data',
+      },
     })
   } catch (error) {
     handleErrorResponse(error)

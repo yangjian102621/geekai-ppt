@@ -211,20 +211,23 @@ def migrate_add_is_published():
 
 
 def seed_default_user():
-    """若不存在 id=1 的用户，则插入默认用户 18575670125 / 123456，并将所有 presentations.user_id 设为 1。"""
+    """若不存在 id=1 的用户，则插入默认用户 18888888888 / 12345678，并将所有 presentations.user_id 设为 1。"""
     from sqlalchemy import text
     from datetime import datetime, timezone
 
     default_user_id = "1"
-    default_username = "18575670125"
-    default_password_hash = _bcrypt_hash("123456")
+    default_username = "18888888888"
+    default_password_hash = _bcrypt_hash("12345678")
     now = datetime.now(timezone.utc).isoformat()
 
     with engine.connect() as conn:
         r = conn.execute(text("SELECT id FROM users WHERE id = :id"), {"id": default_user_id})
         if r.fetchone() is not None:
             # 用户已存在，仅统一 presentations.user_id
-            conn.execute(text("UPDATE presentations SET user_id = :uid WHERE user_id IS NULL OR user_id != :uid"), {"uid": default_user_id})
+            conn.execute(
+                text("UPDATE presentations SET user_id = :uid WHERE user_id IS NULL OR user_id != :uid"),
+                {"uid": default_user_id},
+            )
             conn.commit()
             return
         conn.execute(
